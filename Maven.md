@@ -4,6 +4,10 @@
 
 ### 1.1 What
 
+1.maven 是一个用来将源码构建为一个可发布构件的工具
+
+同时也是
+
 1.项目管理工具，包含一个项目对象模型，一组标准集合，一个项目生命周期，一个项目依赖管理系统
 
 
@@ -12,13 +16,15 @@
 
 ### 1.2.约定优于配置
 
+maven中设定了很多的默认值
+
 maven 假定源码在src/main/java中
 
 maven假定资源文件在src/main/resources中
 
 maven假定测试源码在src/test/java中
 
-maven假定测试资源文件在src/test/resources中1.maven 是一个用来将源码构建为一个可发布构件的工具
+maven假定测试资源文件在src/test/resources中
 
 
 
@@ -605,7 +611,7 @@ Downloaded: http://maven.aliyun.com/nexus/content/groups/public/org/codehaus/ple
 
 mvn install 命令并没有指定一个插件目标，而是指定了一个maven**生命周期阶段**，一个**阶段**是在maven中的**构建生命周期**中的一个步骤。
 
-生命周期是包含在一个项目构建过程中一系列有序的阶段。
+生命周期是：包含在一个项目构建过程中一系列有序的阶段。
 
 maven可以支持许多不同的生命周期，最常用的是maven默认生命周期。
 
@@ -628,6 +634,37 @@ maven可以支持许多不同的生命周期，最常用的是maven默认生命�
 
 
 #### 3.Maven坐标
+
+Maven POM 为项目定义了一组唯一的标识符，他们可以用来唯一标识一个项目，一个以来或一个maven插件。
+
+```xml
+<groupId>com.test.maven</groupId>
+  <artifactId>app1</artifactId>
+  <version>1.0-SNAPSHOT</version>
+<packaging>jar</packaging>
+```
+
+一个maven坐标就是“空间”中的一个点，当一个项目通过依赖，插件或者父项目引用和另外一个项目相关联的时候，Maven通过坐标来精确定位一个项目。
+
+maven通过冒号作为分隔符书写坐标：groupId:artifactId:packaging:version.
+
+groupId: 团队，小组，公司等标识符，通常是使用创建这个项目的组织的逆向域名，org.apache
+
+artifactId:在groupId下表示一个单独的项目的标识符
+
+version:一个项目的特定的版本，正在开发中的版本使用特殊标识符，版本号-SANPSHOT
+
+packaging: **maven唯一坐标中不包含**。打包方式，默认是jar
+
+
+
+#### 4.仓库
+
+1.构件和插件在被需要的时候才会被下载
+
+2.maven自带一个提供核心插件和依赖的远程仓库地址：http://repo1.maven.org/maven2
+
+3.默认的远程仓库可以被替代或增加一个自己的仓库
 
 
 

@@ -386,5 +386,80 @@ System.out.pringln(a.equalsIngoreCase(b));//true 不区分大小写
 
 
 
+#### 5.Methods of String
+
+##### 5.1 Constructor
+
+| Constructor                              | Means                                    |
+| ---------------------------------------- | ---------------------------------------- |
+| new String()                             | 创建一个空的字符串对象                              |
+| new String(byte[] bytes)                 | 使用平台默认的字符集和提供的解码的字节数组构建一个字符串             |
+| new String(byte[] bytes, int offset, int length) | 从给定的字节数组中的第offset个字节开始，构建length个长度的字符串。  |
+| new String(byte[] bytes, int offset, int length, Charset charset) | 以指定的字符集，从给定的字节数组中的第offset个字节开始，构建length个长度的字符串。 |
+| new String(byte[] bytes, int offset, int length, String charsetName) | 以指定的字符集名称，从给定的字节数组中的第offset个字节开始，构建length个长度的字符串。 |
+| new String(byte[] bytes, String charsetName) | 以指定的字符集名称，字节数组构建一个字符串                    |
+| String(char[] value)                     |                                          |
+| String(StringBuffer buffer)              |                                          |
+| String (StringBuilder builde)            |                                          |
+
+
+
+##### 5.2 Methods
+
+| methods                                  | means                                    |
+| ---------------------------------------- | ---------------------------------------- |
+| char charAt(int index)                   |                                          |
+| boolean comparTo(String other)           | 以字典顺序比较两字符串的大小，基于String中每个字符的unicode value比较。如果this 字符序列在参数String之前返回正数，如果this字符序列在参数String之后返回负数，如果两个自负序列相等，返回0; 如果两个字符串不想等，要么两个字符串对象所表示的字符序列在某些索引下的字符不想等，要么两个字符序列的长度不等，或都有。如果两个字符串所表示的字符序列存在不相等的字符，假设k是最小的那个索引，比较的就是这个位置上的两个字符大小。this.charAt(k)-another.charAt(k);如果两个字符串的字符序列中没有不相同的字符，那么比较的就是长度。this.length() - another.length(); |
+| contains(CharSequence s)                 | 当String包含特定的 字符序列时返回true，CharSequence可以是String，StringBuilder,StringBuffer 等 |
+| endWith(String suffix)                   |                                          |
+| startWith(String perfix)                 |                                          |
+| equals(Object object)                    |                                          |
+| fomat(Locale l,String format,Object ... args) |                                          |
+| format(String format, Object ... args)   |                                          |
+|                                          |                                          |
+
+##### 5.3 formatter String'
+
+public static String format(Locale l, String format, Object ... args);
+
+public static String format(String format, Object ... args);
+
+如果参数l是null，那么本地化将不会有效（没有exception）
+
+- java.util.Formatter
+
+  格式化
+
+一个格式翻译器，提供了支持正确布局和对齐。通常为数字，时间，日期，字符串提供格式化，通常类型可以是如type，BigDecimal，Calendar等。
+
+Formatter为用户自定义的类提供格式化支持
+
+
+
+每一个格式化方法都需要一个格式字符串和一个参数列表。格式字符串可以包含固定的文本和一些格式说明符。
+
+```java
+Calendar c = Calendar.getIntance();
+String s = String.format("Duke's Birthday : %1$tm %1$te %1$tY", c);
+```
+
+
+
+syntax
+
+%\[argument_index$\]\[flags]\[width][.precision]conversion 
+
+| key            | mean                                     |
+| -------------- | ---------------------------------------- |
+| argument_index | (optional)十进制整数，用于指明参数列表中的参数的位置，第一个参数使用1$,第二个参数使用2\$ |
+| flags          | (optional)一个字符集合，用于修饰输出格式 The set of valid flags depends on the conversion |
+| width          | (optional)一个十进制正整数，表示最少输出的字符数量           |
+| .precision     | (optional)非负整数，通常用于约束字符的数量，特定的行为取决于conversion |
+| conversion     | (required)一个字符，表示参数需要怎样格式化， The set of valid conversions for a given argument depends on the argument's data type。 |
+
+
+
+
+
 
 
