@@ -150,7 +150,66 @@ Set-Cookie: c2=b;path="/",c3=c; domain="localhost"
 2
 ```
 
+更方便的方式是是使用迭代器
 
+```java
+HttpResponse response = new BasicHttpResponse(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, "OK");
+        response.addHeader("Set-Cookie", "c1=a;path=/;domain=localhost");
+        response.addHeader("Set-Cookie", "c2=b;path=\"/\",c3=c; domain=\"localhost\"");
+
+        HeaderIterator iter = response.headerIterator("Set-Cookie");
+        while (iter.hasNext()){
+            System.out.println(iter.next());
+        }
+```
+
+```
+Set-Cookie: c1=a;path=/;domain=localhost
+Set-Cookie: c2=b;path="/",c3=c; domain="localhost"
+```
+
+以及方便的解析值的方法
+
+```java
+HttpResponse response = new BasicHttpResponse(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, "OK");
+response.addHeader("Set-Cookie", "c1=a;path=/;domain=localhost");
+response.addHeader("Set-Cookie", "c2=b;path=\"/\",c3=c; domain=\"localhost\"");
+
+HeaderElementIterator iterator = 
+  new BasicHeaderElementIterator(response.headerIterator("Set-Cookie"));
+while (iterator.hasNext()) {
+  HeaderElement item = iterator.nextElement();
+  NameValuePair[] pairs = item.getParameters();
+  for (NameValuePair pair : pairs) {
+    System.out.println(pair.toString());
+  }
+}
+```
+
+```
+path=/
+domain=localhost
+path=/
+domain=localhost
+```
+
+
+
+
+
+#### 1.1.4 Http entity
+
+Http可以携带一个request/response相关的内容实体，这些实体可以在一些请求对象或响应对象中找到，在HTTP规范中，有两个请求方式可以携带内容实体：POST/PUT。而响应对象一般都希望携带内容实体。有一些例外情况诸如是HEAD请求，或者响应的是204 no content, 304 not modified, 205 reset content 。
+
+
+
+Http 区分了三种实体， 如何区分取决于他们的内容来自哪里？
+
+HttpClient distinguishes three kinds of entities, depending on where their content originates:
+
+- streamed: 内容从流中
+- self-contained
+- wrapping
 
 
 
