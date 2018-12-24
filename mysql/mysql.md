@@ -27,16 +27,6 @@ grant all on db_name.* to 'username'@'client_host';
 
 
 
-
-
-
-
-
-
-
-
-
-
 权限:
 
 | Privileges             | Type          | Null | key  | default | extra |
@@ -322,3 +312,70 @@ select * from tb_a a inner join tb_b b on a.name = b.name where a.name = 'lisi';
 ```
 
 该语句只会将两张表中name 是lisi的数据加载出来，如果只有一张表中存在lisi，那么该数据就不会出现在结果集
+
+
+
+
+
+
+
+
+
+
+
+# Storage Engines
+
+
+
+> Storage engines are MySQL components that handle the SQL operations for different table types. [`InnoDB`](https://dev.mysql.com/doc/refman/5.7/en/innodb-storage-engine.html) is the default and most general-purpose storage engine, and Oracle recommends using it for tables except for specialized use cases.  
+
+
+
+存储引擎时MySQL的底层组件，用于在不同的表类型中进行sql语句处理. `InnoDB`是默认的存储引擎，且最为通用，Oracle推荐使用`InnoDB`除非有特殊的应用场景。
+
+==Note==
+
+在Mysql 5.7 中 `CREATE TABLE` 语句默认使用`InnoDB`作为存储引擎。
+
+
+
+MySql 使用可插拔的存储引擎结构，可以在运行时加载或卸载存储引擎
+
+==show engines==
+
+![1545622058729](C:\B_docs\Notes\mysql\mysql.assets\1545622058729.png)
+
+
+
+
+
+## mysql 支持的存储引擎
+
+- InnoDB : 
+
+  MySql 5.7 的默认存储引擎，它是事物安全型的（遵从ACID），它提供了`提交，回滚，故障恢复`的能力，用于保护用户的数据。InnoDB行级锁和一致性非锁定读提高了多用户并发和性能。
+
+- MyISAM
+
+- Memory
+
+- CSV
+
+- Archive
+
+- Blackhole
+
+- NDB
+
+- Merge
+
+- Federated
+
+- Example
+
+
+
+
+
+## 
+
